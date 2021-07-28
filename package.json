@@ -1,0 +1,19 @@
+{
+  "name": "datastructure",
+  "version": "1.0.0",
+  "description": "learning data structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "data",
+    "structures"
+  ],
+  "author": "loivp",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.0.6"
+  },
+  "type": "module"
+}
