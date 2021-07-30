@@ -8,6 +8,5 @@ linkedList.push(3);
 
 linkedList.pop();
 linkedList.pop();
-linkedList.pop();
 
 console.log(linkedList);

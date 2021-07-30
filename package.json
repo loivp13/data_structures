@@ -4,7 +4,7 @@
   "description": "learning data structures",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --color --watchAll"
   },
   "keywords": [
     "data",
@@ -15,5 +15,29 @@
   "dependencies": {
     "jest": "^27.0.6"
   },
-  "type": "module"
+  "type": "module",
+  "env": {
+    "node": true,
+    "jest": true,
+    "es6": true,
+    "browser": true
+  },
+  "jest": {
+    "collectCoverage": true,
+    "moduleFileExtensions": [
+      "js",
+      "mjs"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.mjs$": "babel-jest"
+    },
+    "testRegex": "((\\.|/*.)(test))\\.js?$"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/node": "^7.14.7",
+    "@babel/preset-env": "^7.14.8",
+    "cross-env": "^7.0.3"
+  }
 }

@@ -1,6 +1,6 @@
-import Node from "./Node.js";
+import Node from "./Node";
 
-export default class SinglyLinkedList {
+class SinglyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -26,6 +26,10 @@ export default class SinglyLinkedList {
   pop() {
     if (!this.head) {
       return;
+    } else if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+      this.length--;
     } else {
       let currentNode = this.head;
       let newTail = this.head;
@@ -33,10 +37,13 @@ export default class SinglyLinkedList {
         newTail = currentNode;
         currentNode = currentNode.next;
       }
+
       this.tail = newTail;
-      currentNode.next = null;
+      this.tail.next = null;
       this.length--;
       return this;
     }
   }
 }
+
+module.exports = { SinglyLinkedList };
