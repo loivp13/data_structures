@@ -51,16 +51,24 @@ describe("testing singlyLinkedList", () => {
     expect(linkedList.pop()).toBe(undefined);
   });
 
-  it("correct remove 1 node", () => {
+  it("correctly remove 1 node", () => {
     linkedList.push(1);
     linkedList.push(2);
+    linkedList.push(3);
     linkedList.pop();
-
     mockLinkedList = {
       head: new Node(1),
-      tail: new Node(1),
-      length: 1,
+      tail: new Node(2),
+      length: 2,
     };
+    mockLinkedList.head.next = new Node(2);
+
+    expect(linkedList).toEqual(mockLinkedList);
+
+    linkedList.pop();
+    mockLinkedList.head.next = null;
+    mockLinkedList.tail = mockLinkedList.head;
+    mockLinkedList.length = 1;
     expect(linkedList).toEqual(mockLinkedList);
 
     linkedList.pop();
