@@ -1,5 +1,6 @@
 import Node from "./Node.js";
-let { SinglyLinkedList } = require("./SinglyLinkedList.js");
+import SinglyLinkedList from "./SinglyLinkedList.js";
+import { generateMockList } from "./testHelper.js";
 
 describe("testing singlyLinkedList", () => {
   let linkedList;
@@ -77,6 +78,90 @@ describe("testing singlyLinkedList", () => {
       tail: null,
       length: 0,
     };
+    expect(linkedList).toEqual(mockLinkedList);
+    mockLinkedList.head = new Node(1);
+    expect(linkedList).not.toEqual(mockLinkedList);
+  });
+
+  it("correctly shift nodes", () => {
+    linkedList.push(1);
+    linkedList.push(2);
+    let shiftedNode = linkedList.shift();
+    mockLinkedList = {
+      head: new Node(2),
+      tail: new Node(2),
+      length: 1,
+    };
+    expect(linkedList).toEqual(mockLinkedList);
+    expect(shiftedNode).toEqual(new Node(1));
+    linkedList.shift();
+    mockLinkedList = {
+      head: null,
+      tail: null,
+      length: 0,
+    };
+    expect(linkedList).toEqual(mockLinkedList);
+
+    expect(linkedList.shift()).toBe(undefined);
+  });
+
+  it("correctly unshift nodes", () => {
+    linkedList.unshift(1);
+    mockLinkedList = {
+      head: new Node(1),
+      tail: new Node(1),
+      length: 1,
+    };
+    expect(linkedList).toEqual(mockLinkedList);
+    linkedList.unshift(2);
+    mockLinkedList.head = new Node(2);
+    mockLinkedList.head.next = new Node(1);
+    mockLinkedList.length = 2;
+    expect(linkedList).toEqual(mockLinkedList);
+  });
+
+  it("gets correct node", () => {
+    linkedList.push(1);
+    linkedList.push(2);
+    linkedList.push(3);
+    linkedList.push(4);
+    linkedList.push(5);
+    linkedList.push(6);
+
+    generateMockList(6, mockLinkedList);
+    expect(linkedList).toEqual(mockLinkedList);
+    expect(mockLinkedList.length).toBe(6);
+
+    expect(linkedList.get(1)).toEqual(mockLinkedList.head.next);
+    expect(linkedList.get(3)).toEqual(mockLinkedList.head.next.next.next);
+
+    linkedList.pop();
+    linkedList.pop();
+    linkedList.pop();
+    linkedList.pop();
+    linkedList.pop();
+    linkedList.pop();
+
+    mockLinkedList = {
+      head: null,
+      tail: null,
+      length: 0,
+    };
+    expect(linkedList).toEqual(mockLinkedList);
+
+    expect(linkedList.get(3)).toBe(null);
+  });
+
+  it("set the corrent node", () => {
+    expect(linkedList.set(1)).toBe(false);
+    linkedList.push(1);
+    mockLinkedList = {
+      head: new Node(2),
+      tail: new Node(2),
+      length: 1,
+    };
+    expect(linkedList.head).toBe(linkedList.tail);
+    linkedList.set(0, 2);
     expect(linkedList).toEqual(mockLinkedList);
   });
 });

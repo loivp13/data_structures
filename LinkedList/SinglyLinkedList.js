@@ -1,6 +1,6 @@
 import Node from "./Node";
 
-class SinglyLinkedList {
+export default class SinglyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -44,6 +44,56 @@ class SinglyLinkedList {
       return this;
     }
   }
-}
+  shift() {
+    if (!this.head) {
+      return;
+    }
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+      return;
+    }
 
-module.exports = { SinglyLinkedList };
+    let shiftedNode = this.head;
+    this.head = shiftedNode.next;
+    shiftedNode.next = null;
+    this.length--;
+    return shiftedNode;
+  }
+  unshift(val) {
+    let newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      let currentNode = this.head;
+      this.head = newNode;
+      this.head.next = currentNode;
+    }
+    this.length++;
+    return this;
+  }
+  get(index) {
+    if (index < 0 || index > this.length - 1) {
+      return null;
+    }
+    let currentNode = this.head;
+    for (let i = 0; i < this.length; i++) {
+      if (i === index) {
+        return currentNode;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+  }
+  set(index, value) {
+    let foundNode = this.get(index);
+    console.log(foundNode);
+    if (!foundNode) {
+      return false;
+    } else {
+      foundNode.val = value;
+    }
+  }
+}
